@@ -15,6 +15,8 @@ import java.util.HashSet;
 public class Bank implements Serializable {
 	private static final long serialVersionUID = -8301089924358306706L;
 
+	//TODO Here introduce Muellbauer's realistic mortgages
+
 	public int    N_PAYMENTS = 12*25; // number of monthly repayments
 	public double INITIAL_BASE_RATE = 0.005; // Bank base-rate (0.5%)
 	public double MAX_OO_LTV = 0.9;		// maximum LTV bank will give to owner-occupier when not regulated	
