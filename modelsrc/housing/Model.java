@@ -45,6 +45,7 @@ public class Model extends SimState implements Steppable {
 	}
 
 	public Model(long seed) {
+		// TODO: Here introduce the price bands experiment
 		super(seed);
 		government = new Government();
 		demographics = new Demographics();
