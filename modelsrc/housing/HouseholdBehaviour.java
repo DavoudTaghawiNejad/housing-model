@@ -450,6 +450,7 @@ public class HouseholdBehaviour implements Serializable {// implements IHousehol
 //	}
 
 	/*** @returns expectation value of HPI in one year's time divided by today's HPI*/
+	// TODO Here we will introduce more realistic expectations
 	public double HPAExpectation() {
 		return(Model.housingMarket.housePriceAppreciation()*HPA_EXPECTATION_WEIGHT);
 	}

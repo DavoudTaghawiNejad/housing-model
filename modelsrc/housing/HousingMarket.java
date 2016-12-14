@@ -3,18 +3,10 @@ package housing;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import org.apache.commons.math3.distribution.GeometricDistribution;
-import org.apache.commons.math3.distribution.LogNormalDistribution;
-import org.apache.commons.math3.distribution.PoissonDistribution;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 import utilities.PriorityQueue2D;
 
@@ -54,8 +46,8 @@ public abstract class HousingMarket implements Serializable {
 		bids = new ArrayList<>(Demographics.TARGET_POPULATION/16);
 		HPIRecord = new DescriptiveStatistics(Config.HPI_LENGTH);
 		quarterlyHPI.addValue(1.0);
-		quarterlyHPI.addValue(1.0);		
-		init();
+		quarterlyHPI.addValue(1.0);
+		//init();
 	}
 	
 	public void init() {
@@ -186,9 +178,13 @@ public abstract class HousingMarket implements Serializable {
 				Collections.sort(offer.matchedBids, new HouseBuyerRecord.PComparator()); // highest price last
 				--nBids;
 				if(offer.matchedBids.get(nBids).getPrice() < salePrice) {
+					//TODO: When we bid up the price and no one can afford it, we are looking at the buyer's desired
+					// expenditures and choosing the buyer with the highest desired expenditure, and sell the house
+					// at that price. This violates our condition that desired expenditures are secret to the seller.
 					salePrice = offer.matchedBids.get(nBids).getPrice();
 					winningBid = nBids;
 				} else {
+					//TODO: THIS CODE IS RIDICULOUSLY UGLY
 					while(nBids >=0 && offer.matchedBids.get(nBids).getPrice() > salePrice) {
 						--nBids;
 					}
@@ -202,9 +198,11 @@ public abstract class HousingMarket implements Serializable {
 				bids.addAll(offer.matchedBids.subList(0, winningBid));
 				bids.addAll(offer.matchedBids.subList(winningBid+1, offer.matchedBids.size()));			
 			}
-		}		
+		}
+
+
 	}
-	
+
 	/**************************************************
 	 * Main simulation step.
 	 *
@@ -417,3 +415,4 @@ public abstract class HousingMarket implements Serializable {
 	public double dLogPriceMean;
 	public double dLogPriceSD;
 }
+
