@@ -36,6 +36,8 @@ public class Model extends SimState implements Steppable {
 	public boolean recordCoreIndicators = true; // True to write time series for each core indicator
 	public boolean recordMicroData = false; // True to write micro data for each transaction made
 
+	// THIS IS A CHANGE!
+
 	////////////////////////////////////////////////////////////////////////
 
 	public static void main(String[] args) {
@@ -97,6 +99,8 @@ public class Model extends SimState implements Steppable {
 			File f = new File(monteCarloCheckpoint);
 			readFromCheckpoint(f);
 		}
+
+
 	}
 
 	/**
@@ -111,7 +115,8 @@ public class Model extends SimState implements Steppable {
         	File f = new File(monteCarloCheckpoint);
         	readFromCheckpoint(f);
         }
-			// recorder.start();
+
+		// recorder.start();
 	}
 	
 	public void stop() {
